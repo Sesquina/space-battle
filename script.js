@@ -1,4 +1,4 @@
-/var start = prompt("Are You Ready to fight? yes/no");
+//var start = prompt("Are You Ready to fight? yes/no");
 
 class USS  {
     constructor(name) {
@@ -7,4 +7,7 @@ class USS  {
         this.accuracy = .7;
         this.firepower = 5;     
         
-  
+    }
+    hullHealth(){
+        alert("USS health" + this.hull)
+    }
