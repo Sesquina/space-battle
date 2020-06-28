@@ -1,5 +1,4 @@
 // SPACE BATTLE CONSOLE GAME
-
 //GAME OBJECT
 let game = {
     round: 0,
@@ -10,11 +9,11 @@ let game = {
 
 //MY SHIP OBJECT
 let ussSchwartz = {
-    name: "USS Schwartz",
+    name: "USS Schwartznegger",
     hull: 20,
     firePower: 5,
     accuracy: 0.7,
-    attack: function() {                  //This is my attack function
+    attack: function() {                  //This is my attack function using math.random 
         let attackChance = Math.random();
         if(attackChance <= this.accuracy) {
             return true;
@@ -61,7 +60,8 @@ let buildAlienShips = () => {
     };
 };
 
-// funcion ~ battle
+// function ~ BATTLE function
+
 let battleWithShip = (ship1,ship2) => {
     // put the ships into an array
     let ships = [ship1,ship2];
@@ -112,3 +112,25 @@ let battleWithShip = (ship1,ship2) => {
         }
     }
 }
+// function ~ check user prompt 
+let checkUserPrompt = () => {
+    let responseUpperCase = game.userResponse.toUpperCase();
+    if(responseUpperCase === "ATTACK") {
+        battleWithShip(ussSchwartz,alienShips[game.targetShip]);
+    }
+    else if(responseUpperCase === "RETREAT"){
+        alert("Game Over! You Live to Fight Again Another Day.");
+    }
+}
+
+let startGame = () => {
+    // build alien fleets
+    buildAlienShips();
+    //battleWithShip(ussSchwartz,alienShips[game.targetShip]);
+    game.userResponse = prompt("Alien fleet approaching\nWould you like to ATTACK the first ship or RETREAT?","");
+    checkUserPrompt();
+}
+
+
+// Initialize game
+startGame();
