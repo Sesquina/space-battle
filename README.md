@@ -15,3 +15,6 @@
 	+ Hull - represents hit points a ship can withstand
 	+ Firepower - represents hit points incurring on opposing ship when target is hit
 	+ Accuracy - the lower accuracy rating the less lightly the enemy can hit the ship.
+
+# Live Game Link
+https://spacebattlejs.netlify.app/
