@@ -1,11 +1,11 @@
 // SPACE BATTLE CONSOLE GAME
+
 //GAME OBJECT
 let game = {
     round: 0,
     targetShip: 0,
     userResponse: ""
 }
-
 
 //MY SHIP OBJECT
 let ussSchwartz = {
@@ -24,7 +24,7 @@ let ussSchwartz = {
     }
 };
 
-// create a class for the alien ships
+// CLASS for Alien Ship
 class AlienShip {
     constructor(name,hull,firePower,accuracy) {
         this.name = name;
@@ -32,7 +32,7 @@ class AlienShip {
         this.firePower = firePower;
         this.accuracy = accuracy;
     };
-    attack() {
+    attack() {    //Attack function using math.random
         let attackChance = Math.random();
         if(attackChance <= this.accuracy) {
             return true;
@@ -49,7 +49,7 @@ let alienHullValues = [3,4,5,6];        // alien hull values
 let alienFirePowerValues = [2,3,4];     // alien fire power values
 let alienAccValues = [.6,.7,.8];        // alien accuracy values
 
-// function ~ build alien ships
+// Build Alien Ship Function
 let buildAlienShips = () => {
     for(let i=0;i<6;i++) {  //Iterate 6 values
         let name = "Alien Ship "+(i+1);
@@ -60,7 +60,7 @@ let buildAlienShips = () => {
     };
 };
 
-// function ~ BATTLE function
+// Battle function
 
 let battleWithShip = (ship1,ship2) => {
     // put the ships into an array
@@ -72,13 +72,13 @@ let battleWithShip = (ship1,ship2) => {
     console.log('%c Attack Begins =================','font-size: 30px' );
     while(ships[beingAttacked].hull > 0)
     {
-        // attacking sequence
+        // Attacking Sequence
         if(ships[beingAttacked].hull > 0)
         {
-            // log the attack information
+            // Console log the attack information
             console.log("\n");
             console.log(`%c ${ships[attacking].name} attacked ${ships[beingAttacked].name}`, "color: purple; border: 1px solid grey; font-size: 18px;");
-            // generate an attack on the enemy ship
+            // Generate the attack on the enemy ship 
             attack = ships[attacking].attack();
             if(attack === true) {
                 ships[beingAttacked].hull -= ships[attacking].firePower;
@@ -87,7 +87,7 @@ let battleWithShip = (ship1,ship2) => {
             else {
                 console.log(`%c Attack Unsuccessful! ${ships[beingAttacked].name} Hull: ${ships[beingAttacked].hull}`, "color: red; font-size: 16px;");
             }
-            // check if the ship being attack is still alive
+            // Check if the ship being attacked is still alive
             if(ships[beingAttacked].hull <= 0) {
                 console.log(`%c ${ships[beingAttacked].name} has been destroyed`, "color: red; border: 1px solid grey; font-size: 16px;");
                 if(ships[beingAttacked] === ussSchwartz) {
@@ -104,7 +104,7 @@ let battleWithShip = (ship1,ship2) => {
                 }
             }
             else {
-                // swap the attacking and being attacked ships
+                // Switch the attacking/attacked ships
                 temp = attacking;
                 attacking = beingAttacked;
                 beingAttacked = temp;
@@ -112,7 +112,7 @@ let battleWithShip = (ship1,ship2) => {
         }
     }
 }
-// function ~ check user prompt 
+// Function to check user promts 
 let checkUserPrompt = () => {
     let responseUpperCase = game.userResponse.toUpperCase();
     if(responseUpperCase === "ATTACK") {
@@ -124,9 +124,9 @@ let checkUserPrompt = () => {
 }
 
 let startGame = () => {
-    // build alien fleets
+    // Build alien fleets
     buildAlienShips();
-    //battleWithShip(ussSchwartz,alienShips[game.targetShip]);
+   
     game.userResponse = prompt("Alien fleet approaching\nWould you like to ATTACK the first ship or RETREAT?","");
     checkUserPrompt();
 }
