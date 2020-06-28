@@ -60,3 +60,55 @@ let buildAlienShips = () => {
         alienShips[i] = new AlienShip(name,hull,firePower,accuracy);
     };
 };
+
+// funcion ~ battle
+let battleWithShip = (ship1,ship2) => {
+    // put the ships into an array
+    let ships = [ship1,ship2];
+    let attack = false;
+    let attacking = 0;
+    let beingAttacked = 1;
+    let temp;
+    console.log('%c Attack Begins =================','font-size: 30px' );
+    while(ships[beingAttacked].hull > 0)
+    {
+        // attacking sequence
+        if(ships[beingAttacked].hull > 0)
+        {
+            // log the attack information
+            console.log("\n");
+            console.log(`%c ${ships[attacking].name} attacked ${ships[beingAttacked].name}`, "color: purple; border: 1px solid grey; font-size: 18px;");
+            // generate an attack on the enemy ship
+            attack = ships[attacking].attack();
+            if(attack === true) {
+                ships[beingAttacked].hull -= ships[attacking].firePower;
+                console.log(`%c Attack Successful! ${ships[beingAttacked].name} Hull: ${ships[beingAttacked].hull}`, "color: green; font-weight: bold; font-size: 16px;");
+            }
+            else {
+                console.log(`%c Attack Unsuccessful! ${ships[beingAttacked].name} Hull: ${ships[beingAttacked].hull}`, "color: red; font-size: 16px;");
+            }
+            // check if the ship being attack is still alive
+            if(ships[beingAttacked].hull <= 0) {
+                console.log(`%c ${ships[beingAttacked].name} has been destroyed`, "color: red; border: 1px solid grey; font-size: 16px;");
+                if(ships[beingAttacked] === ussSchwartz) {
+                    alert("Game Over!!!");
+                }
+                else if(ships[beingAttacked].name === alienShips[alienShips.length-1].name) {
+                    alert(`%c ${ships[beingAttacked].name} destroyed!\nAlien fleet has been destroyed!\nyou have been victorious`, "color: green;");
+                }
+                else {
+                    game.userResponse = prompt(`${alienShips[game.targetShip].name} destroyed!!\n${ussSchwartz.name} Hull: ${ussSchwartz.hull}\nWould you like to attack the next ship or RETREAT from battle?`,"");
+                    game.targetShip += 1;
+                    checkUserPrompt();
+                    return ;
+                }
+            }
+            else {
+                // swap the attacking and being attacked ships
+                temp = attacking;
+                attacking = beingAttacked;
+                beingAttacked = temp;
+            }
+        }
+    }
+}
