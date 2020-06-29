@@ -44,24 +44,24 @@ class AlienShip {
     };
 };
 
-// Alien Arrays
+// Alien Arrays-Will Loop through these values to configure ship
 let alienShips = [];                    // alien ships
 let alienHullValues = [3,4,5,6];        // alien hull values
 let alienFirePowerValues = [2,3,4];     // alien fire power values
 let alienAccValues = [.6,.7,.8];        // alien accuracy values
 
-// Build Alien Ship Function
+// Build Alien Ship Function. Create a For loop that uses the arrays above using math.floor & math.random
 let createAlienShips = () => {
     for(let i=0;i<6;i++) {  //Iterate 6 values
-        let name = "Alien Ship "+(i+1);
+        let name = "Alien Ship "+(i+1); 
         let hull = alienHullValues[Math.floor(Math.random() * 4)];
         let firePower = alienFirePowerValues[Math.floor(Math.random() * 3)];
         let accuracy = alienAccValues[Math.floor(Math.random() * 3)];
-        alienShips[i] = new AlienShip(name,hull,firePower,accuracy);
+        alienShips[i] = new AlienShip(name,hull,firePower,accuracy); //The result will be a new alien ship with the new parameters
     };
 };
 
-// Battle function
+// Battle Function=Set up a function that "Holds" the battle
 
 let shipsBattle = (ship1,ship2) => {
     // put the ships into an array
@@ -71,7 +71,7 @@ let shipsBattle = (ship1,ship2) => {
     let beingAttacked = 1;
     let temp;
     console.log('%c Attack Begins =================','font-size: 30px' );
-    while(ships[beingAttacked].hull > 0)
+    while(ships[beingAttacked].hull > 0) //While the hull is greater than 0...Keep attacking
     {
         // Attacking Sequence
         if(ships[beingAttacked].hull > 0)
@@ -82,7 +82,7 @@ let shipsBattle = (ship1,ship2) => {
             // Generate the attack on the enemy ship 
             attack = ships[attacking].attack();
             if(attack === true) {
-                ships[beingAttacked].hull -= ships[attacking].firePower;
+                ships[beingAttacked].hull -= ships[attacking].firePower; //Increase Fire power
                 console.log(`%c Attack Successful! ${ships[beingAttacked].name} Hull: ${ships[beingAttacked].hull}`, "color: green; font-weight: bold; font-size: 16px;");
             }
             else {
@@ -91,15 +91,15 @@ let shipsBattle = (ship1,ship2) => {
             // Check if the ship being attacked is still alive
             if(ships[beingAttacked].hull <= 0) {
                 console.log(`%c ${ships[beingAttacked].name} has been destroyed`, "color: red; border: 1px solid grey; font-size: 16px;");
-                if(ships[beingAttacked] === ussSchwartz) {
+                if(ships[beingAttacked] === ussSchwartz) {  ///If the USS SHip is being attaced and is destroyed THEN alert player Game is Over
                     alert("Game Over!!!");
                 }
                 else if(ships[beingAttacked].name === alienShips[alienShips.length-1].name) {
                     alert(`%c ${ships[beingAttacked].name} destroyed!\nAlien fleet has been destroyed!\nyou have been victorious`, "color: green;");
-                }
+                } //If USS destroys alien fleet, then alert player of victory
                 else {
-                    game.userResponse = prompt(`${alienShips[game.targetShip].name} destroyed!!\n${ussSchwartz.name} Hull: ${ussSchwartz.hull}\nWould you like to attack the next ship or RETREAT from battle?`,"");
-                    game.targetShip += 1;
+                    game.userResponse = prompt(`${alienShips[game.targetShip].name} destroyed!!\n${ussSchwartz.name} Hull: ${ussSchwartz.hull}\nWould you like to ATTACK the next ship or RETREAT from battle?`,"");
+                    game.targetShip += 1; //PROMPT PLAYER IF THEY WNAT TO CONTINUE OR RETREAT
                     checkUserPrompt();
                     return ;
                 }
