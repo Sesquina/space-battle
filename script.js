@@ -1,13 +1,14 @@
 // SPACE BATTLE CONSOLE GAME
 
-//GAME OBJECT
+//Make the GAME an OBJECT
 let game = {
     round: 0,
     targetShip: 0,
     userResponse: ""
 }
 
-//MY SHIP OBJECT
+
+//MY SHIP becomes an OBJECT
 let ussSchwartz = {
     name: "USS Schwartznegger",
     hull: 20,
@@ -24,7 +25,7 @@ let ussSchwartz = {
     }
 };
 
-// CLASS for Alien Ship
+// CLASS & constructor for Alien Ship
 class AlienShip {
     constructor(name,hull,firePower,accuracy) {
         this.name = name;
@@ -50,7 +51,7 @@ let alienFirePowerValues = [2,3,4];     // alien fire power values
 let alienAccValues = [.6,.7,.8];        // alien accuracy values
 
 // Build Alien Ship Function
-let buildAlienShips = () => {
+let createAlienShips = () => {
     for(let i=0;i<6;i++) {  //Iterate 6 values
         let name = "Alien Ship "+(i+1);
         let hull = alienHullValues[Math.floor(Math.random() * 4)];
@@ -62,7 +63,7 @@ let buildAlienShips = () => {
 
 // Battle function
 
-let battleWithShip = (ship1,ship2) => {
+let shipsBattle = (ship1,ship2) => {
     // put the ships into an array
     let ships = [ship1,ship2];
     let attack = false;
@@ -116,7 +117,7 @@ let battleWithShip = (ship1,ship2) => {
 let checkUserPrompt = () => {
     let responseUpperCase = game.userResponse.toUpperCase();
     if(responseUpperCase === "ATTACK") {
-        battleWithShip(ussSchwartz,alienShips[game.targetShip]);
+        shipsBattle(ussSchwartz,alienShips[game.targetShip]);
     }
     else if(responseUpperCase === "RETREAT"){
         alert("Game Over! You Live to Fight Again Another Day.");
@@ -125,7 +126,7 @@ let checkUserPrompt = () => {
 
 let startGame = () => {
     // Build alien fleets
-    buildAlienShips();
+    createAlienShips();
    
     game.userResponse = prompt("Alien fleet approaching\nWould you like to ATTACK the first ship or RETREAT?","");
     checkUserPrompt();
