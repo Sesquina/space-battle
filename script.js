@@ -1,5 +1,15 @@
 // SPACE BATTLE CONSOLE GAME
 
+//PSEUDO CODE
+//Make the  Game/Ship Objects
+//Make ATTACK functions using math.random
+//Make the Alien ship constructor
+//Make an Array with the alien ship specifications
+//Make a Function that builds the alien ships using the alien array parameters 
+//Make a Function for the Spaceship battle
+//Use While Loop for Battle function
+//Create a Function to check user prompts
+
 //Make the GAME an OBJECT
 let game = {
   round: 0,
@@ -134,7 +144,7 @@ let shipsBattle = (ship1, ship2) => {
     }
   }
 };
-// Function to check user promts
+// Function to check user prompts
 let checkUserPrompt = () => {
   let responseUpperCase = game.userResponse.toUpperCase();
   if (responseUpperCase === "ATTACK") {
